@@ -1,0 +1,12 @@
+# AutoGluon model artifacts (GBs, .pkl files > GitHub's 100 MB limit)
+AutogluonModels/
+
+# Credentials - never commit
+kaggle.json
+.kaggle/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Downloaded competition data
+*.zip
