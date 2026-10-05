@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report-template.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="report-predict-bike-sharing-demand-with-autogluon-solution">Report: Predict Bike Sharing Demand with AutoGluon Solution</h1>
+<h4 id="micaelle-souza">Micaelle Souza</h4>
+<h2 id="initial-training">Initial Training</h2>
+<h3 id="what-did-you-realize-when-you-tried-to-submit-your-predictions-what-changes-were-needed-to-the-output-of-the-predictor-to-submit-your-results">What did you realize when you tried to submit your predictions? What changes were needed to the output of the predictor to submit your results?</h3>
+<p>Initially, I observed that the training dataset contained two additional columns (casual and registered) that were not present in the test set. Because the sum of these two variables directly equates to the target variable (count), they had to be removed from the training features to prevent target leakage. Subsequently, the predictions on the test dataset were formatted into a continuous time-indexed output. A clipping threshold was applied to set any negative values to zero (predictions.clip(lower=0)). Even though the models did not output negative counts, this post-processing step was necessary to comply with the competition requirements, as the evaluation metric (RMSLE) does not accept negative numbers. Finally, the predictions were aligned to match the schema provided in Kaggle’s sample submission template, which allowed for a seamless submission.</p>
+<h3 id="what-was-the-top-ranked-model-that-performed">What was the top ranked model that performed?</h3>
+<p>During the initial baseline run (without additional feature engineering), the best-performing model based on validation error was WeightedEnsemble_L3, followed by LightGBMXT_BAG_L2, achieving Root Mean Squared Error (RMSE) scores of -114.628178 and -115.242330, respectively (corresponding to positive RMSE values of 114.63 and 115.24). After incorporating newly engineered features, WeightedEnsemble_L3 remained the top performer, followed by WeightedEnsemble_L2, reaching validation scores of -32.196982 and -32.362592 (RMSE of 32.20 and 32.36), respectively.</p>
+<h2 id="exploratory-data-analysis-and-feature-creation">Exploratory data analysis and feature creation</h2>
+<h3 id="what-did-the-exploratory-analysis-find-and-how-did-you-add-additional-features">What did the exploratory analysis find and how did you add additional features?</h3>
+<p>The exploratory data analysis confirmed the presence of the casual and registered columns, which formed the target count and were consequently dropped to avoid data leakage. No missing values were detected across the dataset. However, several feature data types required adjustments; type casting was performed to convert encoded numerical features (specifically season and weather) into pandas category types so that AutoGluon could process them appropriately as categorical variables.</p>
+<p>The datetime column was converted to a proper timestamp format and parsed into granular temporal features essential for demand forecasting: month, day, and hour. Using the hour feature, a new categorical feature named day_period was created to segment the day into operational windows: morning, lunch, afternoon, evening, and night. Exploratory plots indicated prominent demand peaks during the morning commute (~8:00 AM) and early evening commute (~5:00 PM).</p>
+<p>Additionally, domain-specific qualitative weather features were engineered:</p>
+<ul>
+<li>
+<p>temperature_category: Segmented temperatures into cold, cool, warm, and hot to reflect outdoor cycling comfort.</p>
+</li>
+<li>
+<p>humidity_category: Categorized relative humidity levels to capture perceived outdoor comfort.</p>
+</li>
+</ul>
+<h3 id="how-much-better-did-your-model-preform-after-adding-additional-features-and-why-do-you-think-that-is">How much better did your model preform after adding additional features and why do you think that is?</h3>
+<p>With the addition of the engineered features, the validation RMSE decreased drastically from 114.628 to 32.197, representing a 71.9% reduction in error. On the Kaggle test leaderboard, the submission score improved from 1.43583 down to 0.48565, which corresponds to a 66.2% improvement in performance (lower is better in RMSLE).</p>
+<p>This substantial performance leap occurred because extracting hour and engineering day_period allowed the tree-based models to directly capture daily urban commuting dynamics (rush hours aligning with typical business schedules). Furthermore, translating continuous weather metrics into perceived comfort bins provided more structured decision boundaries for estimating the public's propensity to choose outdoor bicycle transit over alternative modes.</p>
+<h2 id="hyper-parameter-tuning">Hyper parameter tuning</h2>
+<h3 id="how-much-better-did-your-model-preform-after-trying-different-hyper-parameters">How much better did your model preform after trying different hyper parameters?</h3>
+<p>During the Hyperparameter Optimization (HPO) phase, the model achieved a competitive validation error compared to the default AutoGluon runs: the top internal model was WeightedEnsemble_L2 (RMSE of -32.217247), closely followed by WeightedEnsemble_L3 (-32.389932).</p>
+<p>However, on the Kaggle public leaderboard, the submission score yielded 0.55715. Compared to the feature-engineered model without manual HPO (0.48565), this represented a performance degradation of approximately 14.7% (+0.0715 increase in error). This outcome is primarily attributed to the constraints placed on the search space and execution budget (e.g., setting num_trials=5), which restricted the diversity and size of the base model pool compared to AutoGluon's automated, unconstrained ensembling routines under default presets.</p>
+<h3 id="if-you-were-given-more-time-with-this-dataset-where-do-you-think-you-would-spend-more-time">If you were given more time with this dataset, where do you think you would spend more time?</h3>
+<p>With additional project time, I would explore dedicated sequence-based architectures using the autogluon.timeseries module (such as DeepAR or Temporal Fusion Transformers) and Recurrent Neural Networks (LSTM/GRU) to model sequential dependencies. Furthermore, I would implement a two-stage decomposition strategy: training separate models to predict casual and registered demand independently, and then aggregating their outputs to compute total demand.</p>
+<h3 id="create-a-table-with-the-models-you-ran-the-hyperparameters-modified-and-the-kaggle-score">Create a table with the models you ran, the hyperparameters modified, and the kaggle score.</h3>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>hpo1</th>
+<th>hpo2</th>
+<th>hpo3</th>
+<th>score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initial</td>
+<td>time_limit=600</td>
+<td>presets=best_quality</td>
+<td>fit_strategy=parallel</td>
+<td>1.43525</td>
+</tr>
+<tr>
+<td>add_features</td>
+<td>time_limit=600</td>
+<td>presets=best_quality</td>
+<td>fit_strategy=parallel</td>
+<td>0.46971</td>
+</tr>
+<tr>
+<td>hpo</td>
+<td>time_limit=600</td>
+<td>presets=best_quality</td>
+<td>num_trials=5</td>
+<td>0.57774</td>
+</tr>
+</tbody>
+</table>
+<h3 id="create-a-line-plot-showing-the-top-model-score-for-the-three-or-more-training-runs-during-the-project">Create a line plot showing the top model score for the three (or more) training runs during the project.</h3>
+<p><img src="img/model_test_RMSE.png" alt="model_train_score.png"></p>
+<h3 id="create-a-line-plot-showing-the-top-kaggle-score-for-the-three-or-more-prediction-submissions-during-the-project">Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.</h3>
+<p><img src="img/model_test_score.png" alt="model_test_score.png"></p>
+<h2 id="summary">Summary</h2>
+<p>In this project, AutoGluon was leveraged to build an end-to-end machine learning pipeline for predicting bike sharing demand. The workflow began by cleaning target leakage columns (casual and registered) and enforcing non-negative constraints on predictions to align with Kaggle's RMSLE evaluation.</p>
+<p>The experimental results clearly demonstrated that domain-specific feature engineering provided the most substantial performance leap. By decomposing timestamps into granular hourly data, engineering daily commuting segments (day_period), and categorizing weather comfort, the validation RMSE dropped by 71.9% (from 114.63 to 32.20), while the Kaggle test score improved by 66.2% (from 1.43583 down to 0.48565).</p>
+<p>In contrast, manual hyperparameter optimization with a constrained search budget (num_trials=5) led to a slight performance degradation on the test set (score of 0.55715), highlighting that restrictive search spaces can limit AutoGluon's robust default stacking ensembles. Overall, the project showed that aligning model features with real-world user behavior (rush hours and weather conditions) is far more impactful than hyperparameter tuning alone. Future improvements would focus on dedicated time-series models and two-stage forecasting for casual versus registered riders.</p>
+
+</body>
+</html>
